@@ -16,13 +16,34 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    /**
+   
+     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
     {
-        return view('home');
+        return view('users\home');
+    } 
+  
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function adminHome()
+    {
+        return view('adminHome');
+    }
+  
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function managerHome()
+    {
+        return view('managerHome');
     }
 }

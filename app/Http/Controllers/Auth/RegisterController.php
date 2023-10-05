@@ -8,6 +8,7 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Models\Faculty;
 
 class RegisterController extends Controller
 {
@@ -50,9 +51,16 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
+            'prefix' => 'required',
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'faculty'=>['required'],
+            'branch'=>['required'],
+            'major'=>['required'],
+            'phone' => ['required', 'string', 'max:15', 'min:8'],
+            'student_code' => ['required', 'string', 'max:9', 'min:9'],
+            
         ]);
     }
 
@@ -65,9 +73,21 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
+            'prefix' => $data['prefix'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'faculty_id'=>$data['faculty'],
+            'branch_id'=>$data['branch'],
+            'major_id'=>$data['major'],
+            'Phone' => $data['phone'],
+            'student_code'=> $data['student_code'],
         ]);
+    }
+    public function showRegistrationForm()
+    {
+        $faculties = Faculty::all();
+       
+        return view('auth.register', compact('faculties'));
     }
 }
