@@ -59,6 +59,7 @@
               @if ($apprenty['status']==1 || $apprenty['status']==2 )
 
               <button type="button" class="btn btn-warning">แก้ไข</button>
+              {{-- <a href="{{ route('apprenties.edit', $apprenty->id) }}" class="btn btn-primary">Edit</a> --}}
               <form action="{{ route('Apprenty.destroy', $apprenty->id) }}" method="POST">
                 @csrf
                 @method('DELETE')

@@ -202,9 +202,9 @@
             </ul>
           </li>
           <li class="nav-item">
-            <a href="" class="nav-link ">
+            <a href="{{ route('Agency.index') }}" class="nav-link ">
                 <i class="nav-icon fas fa-edit"></i>
-                <p>xx
+                <p>หน่วยงาน
                 </p>
             </a>
             <a href="" class="nav-link ">
@@ -296,6 +296,7 @@
 
 <!-- jQuery -->
 {{-- <script src="{{ asset('plugins/jquery/jquery.min.js')}}"></script> --}}
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->

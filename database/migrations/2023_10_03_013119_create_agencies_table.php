@@ -15,19 +15,20 @@ class CreateAgenciesTable extends Migration
     {
         Schema::create('agencies', function (Blueprint $table) {
             $table->id();
-            $table->string('agenciesTHname',250);
-            $table->string('agenciesENname',250);
-            $table->text('address');
-            $table->string('county',25);
-            $table->tinyInteger('amphur')->nullable();
-            $table->tinyInteger('district')->nullable();
-            $table->tinyInteger('poststaion')->nullable();
-            $table->string('tel',15);
-            $table->string('Email',250);
-            $table->string('web',250);
-            $table->string('type',3);
-            $table->string('work',3);
-            $table->string('fax',15);
+            $table->string('agenciesTHname',250)->nullable();
+            $table->string('agenciesENname',250)->nullable();
+            $table->text('address')->nullable();
+            $table->string('county',150)->nullable();
+            $table->bigInteger('province')->nullable();
+            $table->bigInteger('amphur')->nullable();
+            $table->bigInteger('district')->nullable();
+            $table->string('poststaion',5)->nullable();
+            $table->string('tel',15)->nullable();
+            $table->string('Email',250)->nullable();
+            $table->string('web',250)->nullable();
+            $table->string('type',3)->nullable();
+            $table->string('work',3)->nullable();
+            $table->string('fax',15)->nullable();
             $table->timestamps();
         });
     }
