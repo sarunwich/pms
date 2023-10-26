@@ -41,7 +41,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::resource('Agency', AgencyController::class);
     Route::resource('Reportstd', ReportstdController::class);
     
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('home', [HomeController::class, 'index'])->name('home');
     Route::get('/Register-internship', [InternshipController::class, 'rinternship'])->name('Register.internship');
     Route::get('/Internship-Registration-Results', [InternshipController::class, 'internshiprr'])->name('Internship.Registration.Results');
     Route::get('/Internship-form', [InternshipController::class, 'Internship_form'])->name('Internship.form');

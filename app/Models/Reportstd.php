@@ -16,4 +16,8 @@ class Reportstd extends Model
         'intendant',
         'Advisors',
     ];
+    public function picreports()
+    {
+        return $this->hasMany(Picreport::class);
+    }
 }

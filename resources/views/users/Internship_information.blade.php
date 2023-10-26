@@ -71,13 +71,13 @@
             <label for="Year">วันที่</label>
             <div class="input-group date" id="dtp_input1" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd"
               data-target-input="nearest">
-              <input type="text" id="date_add" name="date_add" value="{{ old('date_add') }}"
+              <input type="text" id="date_add" name="date_add" onchange="checkDate()" value="{{ old('date_add') }}"
                 class="form-control datetimepicker-input" data-validation-error-msg="กรุณาระบุวันที่" data-target="#dtp_input1" data-validation="required" readonly
                 required>
-              <div class="input-group-append" data-target="#dtp_input1" data-toggle="datetimepicker">
+              <div class="input-group-append"  data-target="#dtp_input1" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
-
+              
             </div>
 @if ($errors->has('date_add'))
           <div class="invalid-feedback">
@@ -193,10 +193,10 @@ var newTextBoxDiv = $(document.createElement('div'))
 
 newTextBoxDiv.after().html('<div class="row"><label class="control-label col-sm-2">ภาพกิจกรรมที่ '+ counter + ' </label>' 
 
-+'<div class="col-sm-4"><input type="file" class="form-control"id="textbox' + counter + '" name="textin[]" value="" required/></div>'
++'<div class="col-sm-4"><input type="file" accept="image/*" class="form-control"id="textbox' + counter + '" name="picdetail[]" value="" required/></div>'
 
 +'<label class="control-label col-sm-2">อธิบายภาพ : </label>'
-+'<div class="col-sm-4"><input type="text" class="form-control"id="emailstudent' + counter + '" name="picdetail[]" value="" required/></div>'
++'<div class="col-sm-4"><input type="text"  data-validation="required" class="form-control"id="emailstudent' + counter + '" name="textin[]" value="" required/></div>'
 +'<div>' 
 );
 
@@ -240,7 +240,8 @@ alert(msg);
 <script>
   //Date picker
  $('#dtp_input1').datetimepicker({
-      format: 'YYYY-MM-DD'
+      format: 'YYYY-MM-DD',
+      maxDate : 'now'
   });
   $('#dtp_input2').datetimepicker({
       format: 'YYYY-MM-DD'
@@ -248,6 +249,7 @@ alert(msg);
 
   
 </script>
+
 <script>
   document.getElementById('addreport').addEventListener('submit', function(event) {
   event.preventDefault();
@@ -264,12 +266,29 @@ alert(msg);
               timer: 2000
           }).then(() => {
               // Redirect to another page
-              window.location.href = '/Internship-status';  // Replace with your desired URL
+              window.location.href = '/Internship-report';  // Replace with your desired URL
           });
       })
       .catch(function (error) {
-          console.error(error);
+        if (error.response.status === 422) {
+                // Handle validation errors
+                var errors = error.response.data.errors;
+var i=0;
+                // Display error messages using SweetAlert
+                var errorMessage = 'Validation Error:\n';
+                for (var key in errors) {
+                    errorMessage += ' ลำดับที่ '+(parseInt(key[10])+1)+' ' + errors[key][0] +'\n';
+                }
+
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Validation Error',
+                    text: errorMessage
+                });
+            } else {
+                console.error(error);
+            }
       });
-});
+})
 </script>
 @endpush

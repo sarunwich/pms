@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Apprenty;
+use App\Models\Reportstd;
+use App\Models\Picreport;
 use Illuminate\Support\Facades\Auth;
 
 class InternshipController extends Controller
@@ -36,7 +38,11 @@ class InternshipController extends Controller
     }
     public function Internship_reports()
     {
-        return view('users.Internship_reports');
+        $uid = Auth::user()->id;
+        $reportstds=Reportstd::where('reportstds.user_id', $uid)
+        ->orderBy('reportstds.date_add', 'desc')
+        ->get();
+        return view('users.Internship_reports',compact('reportstds'));
     }
     public function Internship_information()
     {
