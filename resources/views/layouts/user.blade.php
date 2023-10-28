@@ -130,13 +130,13 @@
               <li class="nav-item">
                 <a href="{{ route('Register.internship') }}" class="nav-link {{ Route::currentRouteName() == 'Register.internship' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>ลงทะเบียนฝึกงาน</p>
+                  <p>ลงทะเบียนฝึกสหกิจ</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('Internship.Registration.Results') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.Registration.Results' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>สถานะลงทะเบียนฝึกงาน</p>
+                  <p>สถานะลงทะเบียนฝึกสหกิจ</p>
                 </a>
               </li>
               
@@ -146,7 +146,7 @@
             <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['Internship.form', 'Internship.status']) ? 'active' : '' }}"">
               <i class="nav-icon far fa-file"></i>
               <p>
-                ขอฝึกงาน
+                ขอฝึกสหกิจ
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -154,13 +154,13 @@
               <li class="nav-item">
                 <a href="{{ route('Internship.form') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.form' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>บันทึกข้อมูลขอฝึกงาน</p>
+                  <p>บันทึกข้อมูลขอฝึกสหกิจ</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('Internship.status') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.status' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>สถานะขอฝึกงาน</p>
+                  <p>สถานะขอฝึกสหกิจ</p>
                 </a>
               </li>
               
@@ -170,7 +170,7 @@
             <a href="#" class="nav-link {{ in_array(Route::currentRouteName(), ['Internship.report', 'Internship.information','Internship.edit','Internship.print']) ? 'active' : '' }}"">
               <i class="nav-icon far fa-file"></i>
               <p>
-                จัดการฝึกงาน
+                จัดการฝึกสหกิจ
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -178,25 +178,25 @@
               <li class="nav-item">
                 <a href="{{ route('Internship.report') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.report' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>รายการฝึกงาน</p>
+                  <p>รายการฝึกสหกิจ</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('Internship.information') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.information' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>บันทึกข้อมูลฝึกงาน</p>
+                  <p>บันทึกข้อมูลฝึกสหกิจ</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('Internship.edit') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.edit' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>แก้ไขข้อมูลฝึกงาน</p>
+                  <p>แก้ไขข้อมูลฝึกสหกิจ</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{ route('Internship.print') }}" class="nav-link {{ Route::currentRouteName() == 'Internship.print' ? 'active' : '' }}">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>พิมพ์ฝึกงาน</p>
+                  <p>พิมพ์ฝึกสหกิจ</p>
                 </a>
               </li>
             </ul>

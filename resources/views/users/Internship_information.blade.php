@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('page_now')
-{{ 'บันทึกข้อมูลฝึกงาน' }} @parent
+{{ 'บันทึกข้อมูลฝึกสหกิจ' }} @parent
 @endsection
 @push('style')
 <!-- daterange picker -->
@@ -41,7 +41,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">บันทึกข้อมูลฝึกงาน</h3>
+    <h3 class="card-title">บันทึกข้อมูลฝึกสหกิจ</h3>
 
     {{-- <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -58,7 +58,7 @@
       {{ session('status') }}
     </div>
     @endif
-    
+
     <form name="r" id="addreport" action="{{ route('Reportstd.store') }}" method="post" enctype="multipart/form-data">
       @csrf
 
@@ -72,30 +72,30 @@
             <div class="input-group date" id="dtp_input1" data-link-field="dtp_input1" data-link-format="yyyy-mm-dd"
               data-target-input="nearest">
               <input type="text" id="date_add" name="date_add" onchange="checkDate()" value="{{ old('date_add') }}"
-                class="form-control datetimepicker-input" data-validation-error-msg="กรุณาระบุวันที่" data-target="#dtp_input1" data-validation="required" readonly
-                required>
-              <div class="input-group-append"  data-target="#dtp_input1" data-toggle="datetimepicker">
+                class="form-control datetimepicker-input" data-validation-error-msg="กรุณาระบุวันที่"
+                data-target="#dtp_input1" data-validation="required" readonly required>
+              <div class="input-group-append" data-target="#dtp_input1" data-toggle="datetimepicker">
                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
               </div>
-              
+
             </div>
-@if ($errors->has('date_add'))
-          <div class="invalid-feedback">
-            {{ $errors->first('date_add') }}
+            @if ($errors->has('date_add'))
+            <div class="invalid-feedback">
+              {{ $errors->first('date_add') }}
+            </div>
+            @endif
           </div>
-          @endif
-          </div>
-          
+
         </div>
-        
+
       </div>
       <div class="form-group">
         <div class="form-row">
           <div class="col-md-12">
-            <label for="Year">Report Details(รายละเอียดการฝึกงาน)</label>
+            <label for="Year">Report Details(รายละเอียดการฝึกสหกิจ)</label>
 
-            <textarea class="form-control" rows="5" id="Details" name="Details" 
-              data-validation="required" data-validation-error-msg="กรุณาระบุรายละเอียดการฝึกงาน" required>{{ old('Details') }}</textarea>
+            <textarea class="form-control" rows="5" id="Details" name="Details" data-validation="required"
+              data-validation-error-msg="กรุณาระบุรายละเอียดการฝึกสหกิจ" required>{{ old('Details') }}</textarea>
             @if ($errors->has('Details'))
             <div class="invalid-feedback">
               {{ $errors->first('Details') }}
@@ -251,44 +251,105 @@ alert(msg);
 </script>
 
 <script>
-  document.getElementById('addreport').addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  // Make an AJAX request to submit the form data
-  axios.post('/Reportstd', new FormData(this))
-      .then(function (response) {
-          // Display success message using SweetAlert
-          Swal.fire({
-              icon: 'success',
-              title: 'Success',
-              text: response.data.message,
-              showConfirmButton: false,
-              timer: 2000
-          }).then(() => {
-              // Redirect to another page
-              window.location.href = '/Internship-report';  // Replace with your desired URL
-          });
-      })
-      .catch(function (error) {
-        if (error.response.status === 422) {
-                // Handle validation errors
-                var errors = error.response.data.errors;
-var i=0;
-                // Display error messages using SweetAlert
-                var errorMessage = 'Validation Error:\n';
-                for (var key in errors) {
-                    errorMessage += ' ลำดับที่ '+(parseInt(key[10])+1)+' ' + errors[key][0] +'\n';
+$(document).ready(function(){
+$("#addreport").on("submit", function(e){
+                e.preventDefault();
+                
+                $.ajax({
+                    url  :"Reportstd",
+                    type :"POST",
+                    cache:false,
+                    contentType : false, // you can also use multipart/form-data replace of false
+                    processData : false,
+                    data: new FormData(this),
+                    success:function(response){ 
+                      Swal.fire({
+                                icon: 'success',
+                                title: 'Success',
+                                text: response.message,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }).then(() => {
+                                // Redirect to another page
+                                window.location.href = 'Internship-report';  // Replace with your desired URL
+                            });
+                      console.log(response);
+                    },error: function (response) {
+                    // Handle errors if needed
+                    console.log(response);
                 }
-
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Validation Error',
-                    text: errorMessage
                 });
-            } else {
-                console.error(error);
-            }
-      });
-})
+            });
+          });
+
+
+//   document.getElementById('addreport').addEventListener('submit', function(event) {
+//   event.preventDefault();
+
+//   // Make an AJAX request to submit the form data
+// //   axios.post('/Reportstd', new FormData(this))
+// //       .then(function (response) {
+// //           // Display success message using SweetAlert
+// //           Swal.fire({
+// //               icon: 'success',
+// //               title: 'Success',
+// //               text: response.data.message,
+// //               showConfirmButton: false,
+// //               timer: 2000
+// //           }).then(() => {
+// //               // Redirect to another page
+// //               window.location.href = '/Internship-report';  // Replace with your desired URL
+// //           });
+// //       })
+// //       .catch(function (error) {
+// //         if (error.response.status === 422) {
+// //                 // Handle validation errors
+// //                 var errors = error.response.data.errors;
+// // var i=0;
+// //                 // Display error messages using SweetAlert
+// //                 var errorMessage = 'Validation Error:\n';
+// //                 for (var key in errors) {
+// //                     errorMessage += ' ลำดับที่ '+(parseInt(key[10])+1)+' ' + errors[key][0] +'\n';
+// //                 }
+
+// //                 Swal.fire({
+// //                     icon: 'error',
+// //                     title: 'Validation Error',
+// //                     text: errorMessage
+// //                 });
+// //             } else {
+// //                 console.error(error);
+// //             }
+// //       });
+
+// // var formData = new FormData($("addreport")[0]);
+// // formData.append( $('#addreport').serialize());
+// $('#addreport').submit(function (e) {
+//             e.preventDefault();
+// var formData = new FormData(this);
+// $.ajax({
+//                 type: 'POST',
+//                 url: 'Reportstd', // Define the route for the form submission
+//                 data:formData,
+//                 success: function (response) {
+//                     alert(response.message);
+//                     Swal.fire({
+//                     icon: 'success',
+//                     title: 'Success',
+//                     text: response.data.message,
+//                     showConfirmButton: false,
+//                     timer: 2000
+//                 }).then(() => {
+//                     // Redirect to another page
+//                     window.location.href = '/Internship-report';  // Replace with your desired URL
+//                 });
+//                 },
+//                 error: function (response) {
+//                     // Handle errors if needed
+//                     console.log(response);
+//                 }
+//             });
+//           });
+// })
 </script>
 @endpush

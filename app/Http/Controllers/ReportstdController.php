@@ -63,6 +63,7 @@ class ReportstdController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
+        $uploadedFiles=[];
         if ($request->hasfile('picdetail')) {
             foreach ($request->file('picdetail') as $key => $picdetail) {
                 $filename = $request->file("picdetail.$key")->getClientOriginalName();
@@ -71,7 +72,7 @@ class ReportstdController extends Controller
                 // $attachmentPdfName->move(public_path('attachmentPdf'), $name);
                 $picdetail->storeAs('public/picdetail', $name);
                 //$attachmentPdfName->storeAs('attachmentPdf', $name);
-                // $attachmentPdfNames[] = $name;
+                 $uploadedFiles[] = $name;
                 $picid = IdGenerator::generate(['table' => 'picreports', 'length' => 7, 'prefix' => date('y'), 'reset_on_prefix_change' => true]);
                 $Picreport = Picreport::insert([
                     'id' => $picid,
@@ -88,7 +89,10 @@ class ReportstdController extends Controller
 
         // ]);
         $message = 'add successfully!';
-        return response()->json(['message' => $message]);
+          return response()->json(['message' => $message]);
+        //  return response()->json(['message' => ' submitted successfully', 'uploaded_files' => $uploadedFiles]);
+
+        // return redirect('/Internship-report')->with('status', 'add Successfully');
     }
 
     /**

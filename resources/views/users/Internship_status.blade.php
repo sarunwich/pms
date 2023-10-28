@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('page_now')
-{{ 'สถานะขอฝึกงาน' }} @parent
+{{ 'สถานะขอฝึกสหกิจ' }} @parent
 @endsection
 @section('content')
 
@@ -8,7 +8,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">สถานะขอฝึกงาน</h3>
+    <h3 class="card-title">สถานะขอฝึกสหกิจ</h3>
 
     {{-- <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -25,7 +25,7 @@
       {{ session('status') }}
     </div>
     @endif
-    สถานะขอฝึกงาน
+    สถานะขอฝึกสหกิจ
     {{-- {{dd($apprentys)}} --}}
     <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover">
@@ -36,7 +36,7 @@
             <th>วันที่เริ่ม</th>
             <th>วันที่สิ้นสุด</th>
             <th>จำนวนวัน</th>
-            <th>สถานะคำร้อง</th>
+            <th>สถานะคำร้อง1</th>
 
           </tr>
         </thead>

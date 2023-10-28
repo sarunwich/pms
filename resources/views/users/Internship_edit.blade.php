@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('page_now')
-    {{ 'แก้ไขรายการฝึกงาน' }} @parent
+    {{ 'แก้ไขรายการฝึกสหกิจ' }} @parent
 @endsection
 @section('content')
 
@@ -8,7 +8,7 @@
  <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">แก้ไขรายการฝึกงาน</h3>
+          <h3 class="card-title">แก้ไขรายการฝึกสหกิจ</h3>
 
           {{-- <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -25,7 +25,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                แก้ไขรายการฝึกงาน
+                แก้ไขรายการฝึกสหกิจ
         </div>
         <!-- /.card-body -->
         {{-- <div class="card-footer">

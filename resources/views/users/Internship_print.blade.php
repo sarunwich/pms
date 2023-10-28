@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('page_now')
-    {{ 'พิมพ์รายการขอฝึกงาน' }} @parent
+    {{ 'พิมพ์รายการขอฝึกสหกิจ' }} @parent
 @endsection
 @section('content')
 
@@ -8,7 +8,7 @@
  <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">พิมพ์รายการขอฝึกงาน</h3>
+          <h3 class="card-title">พิมพ์รายการขอฝึกสหกิจ</h3>
 
           {{-- <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -25,7 +25,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    พิมพ์รายการขอฝึกงาน
+                    พิมพ์รายการขอฝึกสหกิจ
         </div>
         <!-- /.card-body -->
         {{-- <div class="card-footer">

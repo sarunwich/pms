@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('page_now')
-{{ 'รายงานฝึกงาน' }} @parent
+{{ 'รายงานฝึกสหกิจ' }} @parent
 @endsection
 @push('style')
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -17,7 +17,7 @@
 <!-- Default box -->
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title">รายงานฝึกงาน</h3>
+    <h3 class="card-title">รายงานฝึกสหกิจ</h3>
 
     {{-- <div class="card-tools">
       <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -34,7 +34,7 @@
       {{ session('status') }}
     </div>
     @endif
-    รายงานฝึกงาน
+    รายงานฝึกสหกิจ
     <table id="example1" class="table table-bordered table-striped">
       <thead>
         <tr>

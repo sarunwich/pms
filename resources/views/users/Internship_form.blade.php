@@ -1,6 +1,6 @@
 @extends('layouts.user')
 @section('page_now')
-{{ 'บันทึกข้อมูลขอฝึกงาน' }} @parent
+{{ 'บันทึกข้อมูลขอฝึกสหกิจ' }} @parent
 @endsection
 @push('style')
 <!-- daterange picker -->
@@ -41,7 +41,7 @@
 <!-- Default box -->
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">บันทึกข้อมูลขอฝึกงาน</h3>
+        <h3 class="card-title">บันทึกข้อมูลขอฝึกสหกิจ</h3>
 
         {{-- <div class="card-tools">
             <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
@@ -99,13 +99,13 @@
                     <div class="col-md-2">
                         <label for="Year">ชั้นปี</label>
                         <input class="form-control" type="text" id="level" name="level" placeholder="Enter '1-4' "
-                            maxlength="1" data-validation="length number" value="{{ old('level') }}" data-validation-length="min1"
-                            data-validation-error-msg="ชันปีที่กำลังศึกษา" required>
-                            @if ($errors->has('level'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('level') }}
-                            </div>
-                            @endif
+                            maxlength="1" data-validation="length number" value="{{ old('level') }}"
+                            data-validation-length="min1" data-validation-error-msg="ชันปีที่กำลังศึกษา" required>
+                        @if ($errors->has('level'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('level') }}
+                        </div>
+                        @endif
                     </div>
                     <div class="col-md-3">
                         <label for="Year">วันที่เริ่ม</label>
@@ -127,11 +127,11 @@
                     </div>
                     <div class="col-md-3">
                         <label for="Year">วันที่สิ้นสุด</label>
-                        <div class="input-group date" id="dtp_input2" data-link-field="dtp_input1"
+                        <div class="input-group date" id="dtp_input2" onchange="checkdate()" data-link-field="dtp_input2"
                             data-link-format="yyyy-mm-dd" data-target-input="nearest">
-                            <input type="text" id="dtp_input2v" name="lastday" value="{{ old('lastday') }}" class="form-control datetimepicker-input"
-                                data-target="#dtp_input2" readonly required>
-                            <div class="input-group-append" data-target="#dtp_input2" data-toggle="datetimepicker">
+                            <input type="text" id="dtp_input2v" name="lastday" value="{{ old('lastday') }}"
+                                class="form-control datetimepicker-input" data-target="#dtp_input2" readonly required>
+                            <div class="input-group-append"  data-target="#dtp_input2" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
@@ -142,10 +142,10 @@
                         @endif
                     </div>
                     <div class="col-md-2">
-                        <label for="Year">ระยะเวลาฝึกงาน</label>
+                        <label for="Year">ระยะเวลาฝึกสหกิจ</label>
                         <button class="btn btn-info btn-block" onclick="dateDiff()">คำนวน</button>
                     </div>
-                    <span class="help-block form-error">*** ระยะเวลาฝึกงาน รวมเสาร์-อาทิตย์ และวันหยุดนักขัตฤกษ์แล้ว
+                    <span class="help-block form-error">*** ระยะเวลาฝึกสหกิจ รวมเสาร์-อาทิตย์ และวันหยุดนักขัตฤกษ์แล้ว
                         ไม่น้อยกว่า 60 วัน</span>
                 </div>
             </div>
@@ -154,14 +154,14 @@
             <div class="form-group">
                 <div class="form-row">
                     <div class="col-md-12">
-                       <input type="radio" name="sent" value="1" checked="checked"> ขอให้คณะฯ
-                            จัดส่งหนังสือขอความอนุเคราะห์ฝึกงานถึงหน่วยงานทางไปรษณีย์
+                        <input type="radio" name="sent" value="1" checked="checked"> ขอให้คณะฯ
+                        จัดส่งหนังสือขอความอนุเคราะห์ฝึกสหกิจถึงหน่วยงานทางไปรษณีย์
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-12">
                         <input type="radio" name="sent" value="0">
-                            ข้าพเจ้าจะนำหนังสือขอความอนุเคราะห์ฝึกงานไปส่งหน่วยงานด้วยตนเอง
+                        ข้าพเจ้าจะนำหนังสือขอความอนุเคราะห์ฝึกสหกิจไปส่งหน่วยงานด้วยตนเอง
                     </div>
                 </div>
             </div>
@@ -171,11 +171,11 @@
                         <label for="Name">เรียน</label>
                         <input class="form-control" id="boss" type="text" value="{{ old('boss') }}" name="boss"
                             placeholder="ตำแหน่งหัวหน้าหน่วยงาน" data-validation="required" required>
-                            @if ($errors->has('boss'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('boss') }}
-                            </div>
-                            @endif
+                        @if ($errors->has('boss'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('boss') }}
+                        </div>
+                        @endif
                     </div>
                     <div class="col-md-6">
                         <label for="Name">หน่วยงาน</label>
@@ -186,11 +186,11 @@
                         </select> --}}
                         <select class="form-control" id="search" style="width:100%;" name="Agency"
                             ata-validation="required" required></select>
-                            @if ($errors->has('Agency'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('Agency') }}
-                            </div>
-                            @endif
+                        @if ($errors->has('Agency'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('Agency') }}
+                        </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -199,55 +199,54 @@
                 <div class="form-row">
                     <div class="col-md-12">
                         <label for="Name">
-                            แบบฟอร์มขออนุญาตผู้ปกครอง จำนวน 1 ฉบับ  </label>
-                            <input class="form-control" type="file" accept=".pdf" name="filePermissionToUpload" id="filePermissionToUpload"
-                        data-validation="required"
+                            แบบฟอร์มขออนุญาตผู้ปกครอง จำนวน 1 ฉบับ </label>
+                        <input class="form-control" type="file" accept=".pdf" name="filePermissionToUpload"
+                            id="filePermissionToUpload" data-validation="required"
                             data-validation-allowing="jpg, png, gif" data-validation-max-size="512kb"
                             data-validation-error-msg-size="You can not upload images larger than 512kb"
                             data-validation-error-msg-mime="You can only upload images"
                             data-validation-error-msg-length="You have to upload at least one images"
                             data-validation-error-msg-allowing="The file you are trying to upload is of wrong type You can only upload images jpg, png, gif"
                             placeholder="Enter jpg, png, gif ">
-                            @if ($errors->has('filePermissionToUpload'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('filePermissionToUpload') }}
-                            </div>
-                            @endif
+                        @if ($errors->has('filePermissionToUpload'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('filePermissionToUpload') }}
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="col-md-6">
                         <label for="Name">ประวัติส่วนตัวนิสิต (Resume) พร้อมติดรูปถ่าย 1 นิ้ว จำนวน 1 ฉบับ</label>
-                        <input class="form-control" type="file" accept=".pdf" name="fileResumeToUpload" id="fileResumeToUpload"
-                        data-validation="required"
-                            data-validation-allowing="jpg, png, gif" data-validation-max-size="512kb"
-                            data-validation-error-msg-size="You can not upload images larger than 512kb"
-                            data-validation-error-msg-mime="You can only upload images"
-                            data-validation-error-msg-length="You have to upload at least one images"
-                            data-validation-error-msg-allowing="The file you are trying to upload is of wrong type You can only upload images jpg, png, gif"
-                            placeholder="Enter jpg, png, gif ">
-                            @if ($errors->has('fileResumeToUpload'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('fileResumeToUpload') }}
-                            </div>
-                            @endif
-                    </div>
-                    <div class="col-md-6">
-                        <label for="Name">สำเนาใบแสดงผลการเรียน 5 ภาคการเรียนปกติ (Transcript) จำนวน 1 ฉบับ</label>
-                        <input class="form-control" type="file" accept=".pdf" name="fileTranscriptToUpload"
-                            id="fileTranscriptToUpload" data-validation-allowing="jpg, png, gif"
-                            data-validation="required"
+                        <input class="form-control" type="file" accept=".pdf" name="fileResumeToUpload"
+                            id="fileResumeToUpload" data-validation="required" data-validation-allowing="jpg, png, gif"
                             data-validation-max-size="512kb"
                             data-validation-error-msg-size="You can not upload images larger than 512kb"
                             data-validation-error-msg-mime="You can only upload images"
                             data-validation-error-msg-length="You have to upload at least one images"
                             data-validation-error-msg-allowing="The file you are trying to upload is of wrong type You can only upload images jpg, png, gif"
                             placeholder="Enter jpg, png, gif ">
-                            @if ($errors->has('fileTranscriptToUpload'))
-                            <div class="invalid-feedback">
-                                {{ $errors->first('fileTranscriptToUpload') }}
-                            </div>
-                            @endif
+                        @if ($errors->has('fileResumeToUpload'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('fileResumeToUpload') }}
+                        </div>
+                        @endif
+                    </div>
+                    <div class="col-md-6">
+                        <label for="Name">สำเนาใบแสดงผลการเรียน 5 ภาคการเรียนปกติ (Transcript) จำนวน 1 ฉบับ</label>
+                        <input class="form-control" type="file" accept=".pdf" name="fileTranscriptToUpload"
+                            id="fileTranscriptToUpload" data-validation-allowing="jpg, png, gif"
+                            data-validation="required" data-validation-max-size="512kb"
+                            data-validation-error-msg-size="You can not upload images larger than 512kb"
+                            data-validation-error-msg-mime="You can only upload images"
+                            data-validation-error-msg-length="You have to upload at least one images"
+                            data-validation-error-msg-allowing="The file you are trying to upload is of wrong type You can only upload images jpg, png, gif"
+                            placeholder="Enter jpg, png, gif ">
+                        @if ($errors->has('fileTranscriptToUpload'))
+                        <div class="invalid-feedback">
+                            {{ $errors->first('fileTranscriptToUpload') }}
+                        </div>
+                        @endif
 
                     </div>
 
@@ -312,6 +311,14 @@
     $('#dtp_input2').datetimepicker({
         format: 'YYYY-MM-DD'
     });
+
+
+    function checkdate()
+    {
+        var myVar1 = document.getElementById('dtp_input2v').value;//prompt("Enter a start date: ")
+        var myVar2 = document.getElementById('dtp_input1v').value;//prompt("Enter a end date: ")
+        alert(myVar1);
+    }
     function dateDiff(){
 
 
@@ -333,6 +340,7 @@ var result ="";
 //result +=(" " + Math.floor(num_years) + " ปี\n");
 //result +=(" " + Math.floor(num_months) + " ดือน\n");
 result +=(" " + Math.floor(num_days) + " วัน");
+
 alert(result);
 
 }
@@ -340,27 +348,65 @@ alert(result);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
-    document.getElementById('myForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+    //     document.getElementById('myForm').addEventListener('submit', function(event) {
+//     event.preventDefault();
 
-    // Make an AJAX request to submit the form data
-    axios.post('/Internshipformsave', new FormData(this))
-        .then(function (response) {
-            // Display success message using SweetAlert
-            Swal.fire({
-                icon: 'success',
-                title: 'Success',
-                text: response.data.message,
-                showConfirmButton: false,
-                timer: 2000
-            }).then(() => {
-                // Redirect to another page
-                window.location.href = '/Internship-status';  // Replace with your desired URL
-            });
-        })
-        .catch(function (error) {
-            console.error(error);
-        });
-});
+//     // Make an AJAX request to submit the form data
+    
+//     axios.post('/Internshipformsave', new FormData(this))
+//         .then(function (response) {
+//             // Display success message using SweetAlert
+//             Swal.fire({
+//                 icon: 'success',
+//                 title: 'Success',
+//                 text: response.data.message,
+//                 showConfirmButton: false,
+//                 timer: 2000
+//             }).then(() => {
+//                 // Redirect to another page
+//                 window.location.href = '/Internship-status';  // Replace with your desired URL
+//             });
+//         })
+//         .catch(function (error) {
+//             console.error(error);
+//         });
+// });
+
+
+
+
+
+
+$(document).ready(function(){
+    $("#myForm").on("submit", function(e){
+                    e.preventDefault();
+                    
+                    $.ajax({
+                        url  :"Internshipformsave",
+                        type :"POST",
+                        cache:false,
+                        contentType : false, // you can also use multipart/form-data replace of false
+                        processData : false,
+                        data: new FormData(this),
+                        success:function(response){ 
+                          Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                }).then(() => {
+                                    // Redirect to another page
+                                    window.location.href = 'Internship-status';  // Replace with your desired URL
+                                });
+                          console.log(response);
+                        },error: function (response) {
+                        // Handle errors if needed
+                        console.log(response);
+                    }
+                    });
+                });
+              });
+              
 </script>
 @endpush

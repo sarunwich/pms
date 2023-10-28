@@ -242,27 +242,60 @@
   });
 </script>
 <script>
-  document.getElementById('addAgency').addEventListener('submit', function(event) {
-  event.preventDefault();
+//   document.getElementById('addAgency').addEventListener('submit', function(event) {
+//   event.preventDefault();
 
-  // Make an AJAX request to submit the form data
-  axios.post('/Agency', new FormData(this))
-      .then(function (response) {
-          // Display success message using SweetAlert
-          Swal.fire({
-              icon: 'success',
-              title: 'Success',
-              text: response.data.message,
-              showConfirmButton: false,
-              timer: 2000
-          }).then(() => {
-              // Redirect to another page
-              window.location.href = '/Agency';  // Replace with your desired URL
-          });
-      })
-      .catch(function (error) {
-          console.error(error);
-      });
-});
+//   // Make an AJAX request to submit the form data
+//   axios.post('Agency', new FormData(this))
+//       .then(function (response) {
+//           // Display success message using SweetAlert
+//           Swal.fire({
+//               icon: 'success',
+//               title: 'Success',
+//               text: response.message,
+//               showConfirmButton: false,
+//               timer: 2000
+//           }).then(() => {
+//               // Redirect to another page
+//               window.location.href = 'Agency';  // Replace with your desired URL
+//           });
+//       })
+//       .catch(function (error) {
+//           console.error(error);
+//       });
+// });
+$(document).ready(function(){
+    $("#addAgency").on("submit", function(e){
+                    e.preventDefault();
+                    
+                    $.ajax({
+                        url  :"{{route('Agency.store')}}",
+                        type :"POST",
+                        cache:false,
+                        contentType : false, // you can also use multipart/form-data replace of false
+                        processData : false,
+                        data: new FormData(this),
+                        success:function(response){ 
+                          Swal.fire({
+                                    icon: 'success',
+                                    title: 'Success',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 2500
+                                }).then(() => {
+                                    // Redirect to another page
+                                    window.location.href = "{{route('Agency.index')}}";  // Replace with your desired URL
+                                });
+                          console.log(response);
+                        },error: function (response) {
+                        // Handle errors if needed
+                        console.log(response);
+                    }
+                    });
+                });
+              });
+              
+</script>
+
 </script>
 @endpush
