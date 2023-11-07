@@ -8,6 +8,7 @@ use App\Http\Controllers\InternshipController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ApprentyController;
 use App\Http\Controllers\ReportstdController;
+Use App\Http\Controllers\PicreportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,8 +53,15 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/Internship-print', [InternshipController::class, 'Internship_print'])->name('Internship.print');
     Route::post('/Internshipformsave', [InternshipController::class, 'Internship_form_save'])->name('Internship.form.save');
     Route::get('/Agency-autocomplete', [AgencyController::class,'dataAjax'])->name('autocomplete');
-   
+    Route::get('/delReportstd/{Reportstd}', [ReportstdController::class,'destroy'])->name('del.Reportstd');
+    Route::get('/delPicreport/{Picreport}', [PicreportController::class,'destroy'])->name('del.Picreport');
+    Route::get('/redit/{id}',  [ReportstdController::class,'edit'])->name('edit.Reportstd');
+    Route::put('/Reportstdupdate/{id}',  [ReportstdController::class,'update'])->name('Reportstdupdate.Reportstd');
+    Route::post('/addpic',  [PicreportController::class,'addpic'])->name('addpic');
+
+    
 });
+
   
 /*------------------------------------------
 --------------------------------------------

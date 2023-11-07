@@ -8,6 +8,7 @@ use Haruncpi\LaravelIdGenerator\IdGenerator;
 use App\Models\Apprenty;
 use App\Models\Reportstd;
 use App\Models\Picreport;
+use App\Models\Agency;
 use Illuminate\Support\Facades\Auth;
 
 class InternshipController extends Controller
@@ -17,44 +18,67 @@ class InternshipController extends Controller
     {
         return view('users.RegisterInternship');
     }
-    public function  internshiprr() 
-     {
+    public function  internshiprr()
+    {
         return view('users.InternshipRegistrationResults');
     }
     public function Internship_form()
     {
-        return view('users.Internship_form');
+
+        $agencys = Agency::all();
+        return view('users.Internship_form', compact('agencys'));
     }
     public function Internship_status()
     {
         $uid = Auth::user()->id;
-        $apprentys=Apprenty::where('apprenties.user_id', $uid)
-        ->join('agencies', 'agencies.id', '=', 'apprenties.agency_id')
-        ->join('statuses', 'statuses.id', '=', 'apprenties.status')
-        
-        ->select('apprenties.*', 'agencies.agenciesTHname as agenciesTHname','statuses.status_name as status_name')
-        ->get();
-        return view('users.Internship_status',compact('apprentys'));
+        $apprentys = Apprenty::where('apprenties.user_id', $uid)
+            ->join('agencies', 'agencies.id', '=', 'apprenties.agency_id')
+            ->join('statuses', 'statuses.id', '=', 'apprenties.status')
+
+            ->select('apprenties.*', 'agencies.agenciesTHname as agenciesTHname', 'statuses.status_name as status_name')
+            ->get();
+        return view('users.Internship_status', compact('apprentys'));
     }
     public function Internship_reports()
     {
         $uid = Auth::user()->id;
-        $reportstds=Reportstd::where('reportstds.user_id', $uid)
-        ->orderBy('reportstds.date_add', 'desc')
-        ->get();
-        return view('users.Internship_reports',compact('reportstds'));
+        $reportstds = Reportstd::where('reportstds.user_id', $uid)
+            ->orderBy('reportstds.date_add', 'desc')
+            ->get();
+        return view('users.Internship_reports', compact('reportstds'));
     }
     public function Internship_information()
     {
         return view('users.Internship_information');
     }
-    public function  Internship_edit() 
+    public function  Internship_edit()
     {
-        return view('users.Internship_edit');
+        $uid = Auth::user()->id;
+        $reportstds = Reportstd::where('reportstds.user_id', $uid)
+            ->orderBy('reportstds.date_add', 'desc')
+            ->get();
+
+        return view('users.Internship_edit', compact('reportstds'));
     }
-    public function Internship_print()
+    public function Internship_print(Request $request)
     {
-        return view('users.Internship_print');
+        $startdate = $request->input('startdate'); // Search keyword
+        $enddate = $request->input('enddate'); // Search keyword
+
+        $uid = Auth::user()->id;
+        $reportstds = Reportstd::where('reportstds.user_id', $uid)
+        ->orderBy('reportstds.date_add', 'desc')
+        ->get();
+       
+
+            if ($startdate) {
+                $reportstds =Reportstd::whereBetween('date_add', [$startdate, $enddate])
+                   ->where('reportstds.user_id', $uid)
+            ->orderBy('reportstds.date_add', 'desc')
+            ->get();
+            }    
+            
+        return view('users.Internship_print', compact('reportstds','startdate','enddate'));
     }
     public function Internship_form_save(Request $request)
     {
@@ -63,12 +87,12 @@ class InternshipController extends Controller
             'filePermissionToUpload' => 'required|mimes:pdf|max:8192',
             'fileResumeToUpload' => 'required|mimes:pdf|max:8192',
             'fileTranscriptToUpload' => 'required|mimes:pdf|max:8192',
-            'Agency'=> 'required',
-            'boss'=> 'required',
-            'sent'=> 'required',
-            'startday'=> 'required|date',
-            'lastday'=> 'required|date',
-            'level'=> 'required',
+            'Agency' => 'required',
+            'boss' => 'required',
+            'sent' => 'required',
+            'startday' => 'required|date',
+            'lastday' => 'required|date',
+            'level' => 'required',
         ]);
 
         if ($request->hasfile('filePermissionToUpload')) {
@@ -79,7 +103,6 @@ class InternshipController extends Controller
             // $request->plan_file->move(public_path('plan_file'), $name);
             $request->filePermissionToUpload->storeAs('public/Permission', $name);
             $Permission_file_name = $name;
-
         }
         if ($request->hasfile('fileResumeToUpload')) {
 
@@ -89,7 +112,6 @@ class InternshipController extends Controller
             // $request->plan_file->move(public_path('plan_file'), $name);
             $request->fileResumeToUpload->storeAs('public/Profile', $name);
             $Profile_file_name = $name;
-
         }
         if ($request->hasfile('fileTranscriptToUpload')) {
 
@@ -99,7 +121,6 @@ class InternshipController extends Controller
             // $request->plan_file->move(public_path('plan_file'), $name);
             $request->fileTranscriptToUpload->storeAs('public/Transcript', $name);
             $Transcript_file_name = $name;
-
         }
         $uid = Auth::user()->id;
         $id = IdGenerator::generate(['table' => 'apprenties', 'length' => 7, 'prefix' => date('ym'), 'reset_on_prefix_change' => true]);
@@ -120,10 +141,10 @@ class InternshipController extends Controller
             'updated_at' => date('Y-m-d H:i:s'),
 
         ]);
-         // You can set a success message
-    $message = 'Form submitted successfully!';
+        // You can set a success message
+        $message = 'Form submitted successfully!';
 
-    // Return a response with the message
-    return response()->json(['message' => $message]);
+        // Return a response with the message
+        return response()->json(['message' => $message]);
     }
 }

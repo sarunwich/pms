@@ -112,10 +112,15 @@ class ReportstdController extends Controller
      * @param  \App\Models\Reportstd  $reportstd
      * @return \Illuminate\Http\Response
      */
-    public function edit(Reportstd $reportstd)
+    public function edit($id)
     {
         //
+        $data = Reportstd::find($id);
+        // dd($data);
+        return response($data);
     }
+    
+
 
     /**
      * Update the specified resource in storage.
@@ -124,9 +129,12 @@ class ReportstdController extends Controller
      * @param  \App\Models\Reportstd  $reportstd
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Reportstd $reportstd)
+    public function update(Request $request, $id)
     {
         //
+        $data = Reportstd::find($id);
+    $data->update($request->all());
+    return redirect('/Internship-edit')->with('success', 'Data updated successfully');
     }
 
     /**
@@ -135,8 +143,12 @@ class ReportstdController extends Controller
      * @param  \App\Models\Reportstd  $reportstd
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Reportstd $reportstd)
+    public function destroy($reportstd)
     {
         //
+        Picreport::where('reportstd_id', $reportstd)->delete();
+        Reportstd::where('id', $reportstd)->delete();
+        return redirect()->route('Internship.edit')->with('success', ' deleted successfully.');
     }
+
 }

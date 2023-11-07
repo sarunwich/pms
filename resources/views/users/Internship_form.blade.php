@@ -7,11 +7,14 @@
 {{--
 <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css')}}"> --}}
 <!-- Tempusdominus Bootstrap 4 -->
-<link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
-<!-- Select2 -->
 {{--
+<link rel="stylesheet" href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+--}}
+<!-- Select2 -->
+
 <link rel="stylesheet" href="{{ asset('plugins/select2/css/select2.min.css')}}">
 <link rel="stylesheet" href="{{ asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+{{--
 <!-- Bootstrap4 Duallistbox -->
 <link rel="stylesheet" href="{{ asset('plugins/bootstrap4-duallistbox/bootstrap-duallistbox.min.css')}}">
 <!-- BS Stepper -->
@@ -20,7 +23,7 @@
 <link rel="stylesheet" href="{{ asset('plugins/dropzone/min/dropzone.min.css')}}"> --}}
 {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
 {{-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script> --}}
-
+<link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
 <link href="{{ asset('css/validator.css')}}" rel="stylesheet">
 <script src="{{ asset('js/jquery.min.js')}}"></script>
 <script src="{{ asset('js/jquery.form.validator.min.js')}}"></script>
@@ -127,11 +130,11 @@
                     </div>
                     <div class="col-md-3">
                         <label for="Year">วันที่สิ้นสุด</label>
-                        <div class="input-group date" id="dtp_input2" onchange="checkdate()" data-link-field="dtp_input2"
-                            data-link-format="yyyy-mm-dd" data-target-input="nearest">
+                        <div class="input-group date" id="dtp_input2" onchange="checkdate()"
+                            data-link-field="dtp_input2" data-link-format="yyyy-mm-dd" data-target-input="nearest">
                             <input type="text" id="dtp_input2v" name="lastday" value="{{ old('lastday') }}"
                                 class="form-control datetimepicker-input" data-target="#dtp_input2" readonly required>
-                            <div class="input-group-append"  data-target="#dtp_input2" data-toggle="datetimepicker">
+                            <div class="input-group-append" data-target="#dtp_input2" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                             </div>
                         </div>
@@ -184,7 +187,9 @@
                             name="Agency" data-validation="required" required>
                             <option id="province_list"></option>
                         </select> --}}
-                        <select class="form-control" id="search" style="width:100%;" name="Agency"
+
+
+                        <select class="form-control select2bs4" id="search" style="width:100%;" name="Agency"
                             ata-validation="required" required></select>
                         @if ($errors->has('Agency'))
                         <div class="invalid-feedback">
@@ -266,6 +271,7 @@
 <!-- /.card -->
 @endsection
 @push('scripts')
+<script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 <script type="text/javascript">
     var path = "{{ route('autocomplete') }}";
   
@@ -315,9 +321,18 @@
 
     function checkdate()
     {
-        var myVar1 = document.getElementById('dtp_input2v').value;//prompt("Enter a start date: ")
-        var myVar2 = document.getElementById('dtp_input1v').value;//prompt("Enter a end date: ")
-        alert(myVar1);
+        var myVar2 = document.getElementById('dtp_input2v').value;//prompt("Enter a start date: ")
+        var myVar1 = document.getElementById('dtp_input1v').value;//prompt("Enter a end date: ")
+        if(myVar2 <=myVar1 ){
+            Swal.fire(
+                'มีบ่างอย่างไม่ถูกต้อง',
+                'วันที่สิ้นสุดต้องมากกว่าวันที่เริ่มต้น?',
+                'question'
+                )
+            document.getElementById('dtp_input2v').value="";
+
+        }
+        
     }
     function dateDiff(){
 
@@ -408,5 +423,16 @@ $(document).ready(function(){
                 });
               });
               
+</script>
+<script>
+    $(function () {
+      //Initialize Select2 Elements
+      $('.select2').select2()
+  
+      //Initialize Select2 Elements
+      $('.select2bs4').select2({
+        theme: 'bootstrap4'
+      })
+    });
 </script>
 @endpush

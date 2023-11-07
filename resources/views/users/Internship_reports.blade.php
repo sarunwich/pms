@@ -3,13 +3,22 @@
 {{ 'รายงานฝึกสหกิจ' }} @parent
 @endsection
 @push('style')
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-<!-- Font Awesome -->
-<link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}">
+{{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
+{{-- <!-- Font Awesome -->
+<link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css')}}"> --}}
 <!-- DataTables -->
-<link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<link rel="stylesheet" href="{{asset('plugins/select2/css/select2.min.css')}}">
+<link rel="stylesheet" href="{{asset('plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+
+{{-- <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
 <link rel="stylesheet" href="{{ asset('plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
-<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}"> --}}
 @endpush
 @section('content')
 
@@ -42,7 +51,7 @@
           <th>รายละเอียด</th>
           
           <th>พี่เลี้ยง</th>
-          <th>อาจารยที่ปรึกษา</th>
+          <th>อาจารย์นิเทศก์</th>
         </tr>
       </thead>
       <tbody>
@@ -61,7 +70,7 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-12 col-sm-12">
-                    <h3 class="d-inline-block d-sm-none">LOWA Men’s Renegade GTX Mid Hiking Boots Review</h3>
+                    <h3 class="d-inline-block d-sm-none"></h3>
                     <div class="col-12">
 
                       @foreach($reportstd->picreports as $index => $picreport)
@@ -118,7 +127,7 @@
           <th>รายละเอียด</th>
           
           <th>พี่เลี้ยง</th>
-          <th>อาจารยที่ปรึกษา</th>
+          <th>อาจารย์นิเทศก์</th>
         </tr>
       </tfoot>
     </table>
@@ -157,11 +166,10 @@
 <script>
   $(function () {
     $("#example1").DataTable({
-      "responsive": true, "lengthChange": false, "autoWidth": false,
+     
       "order": [[ 0, "desc" ]],
-      "lengthMenu": [ 25, 50, 75, "All" ],
-      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      
+    });
    
   });
 </script>

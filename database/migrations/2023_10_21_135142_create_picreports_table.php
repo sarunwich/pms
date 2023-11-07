@@ -16,7 +16,7 @@ class CreatePicreportsTable extends Migration
         Schema::create('picreports', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('reportstd_id')->nullable();
-            $table->foreign('reportstd_id')->references('id')->on('reportstds');
+            $table->foreign('reportstd_id')->references('id')->on('reportstds')->onDelete('cascade');
             $table->string('picname',150)->nullable();
             $table->string('pictile',500)->nullable();
             $table->timestamps();
