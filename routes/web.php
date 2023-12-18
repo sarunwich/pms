@@ -98,7 +98,7 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
 
      Route::get('/manager/mStudents_under_care', [SupervisionController::class, 'mStudentsUnderCare'])->name('mStudents_under_care');
      Route::get('/mUnderCareSearch', [SupervisionController::class, 'StudentsUnderCare'])->name('mUnderCare.Search');
-     Route::get('/mdata/{id}', [SupervisionController::class, 'show']);
+     Route::get('/mdata/{id}', [SupervisionController::class, 'show'])->name('mdata');
      Route::get('/manager/mstdreportta', [SupervisionController::class, 'mstdreportta'])->name('mstdreportta');
      Route::get('/mfetch-data/{id}',[SupervisionController::class, 'fetchData'])->name('mfetchData'); 
      Route::get('/mfetch-datadetail/{id}',[SupervisionController::class, 'fetchDataDetail'])->name('mfetchDataDetail');
@@ -120,7 +120,7 @@ Route::middleware(['auth', 'user-access:supervision'])->group(function () {
     Route::get('/supervision/home', [HomeController::class, 'supervisionHome'])->name('supervision.home');
     Route::get('/supervision/Students_under_care', [SupervisionController::class, 'StudentsUnderCare'])->name('Students_under_care');
     Route::get('/supervision/UnderCareSearch', [SupervisionController::class, 'StudentsUnderCare'])->name('UnderCare.Search');
-    Route::get('/data/{id}', [SupervisionController::class, 'show']);
+    Route::get('/data/{id}', [SupervisionController::class, 'show'])->name('data');
     Route::get('/supervision/stdreportta', [SupervisionController::class, 'stdreportta'])->name('stdreportta');
     Route::get('/fetch-data/{id}',[SupervisionController::class, 'fetchData'])->name('fetchData'); 
     Route::get('/fetch-datadetail/{id}',[SupervisionController::class, 'fetchDataDetail'])->name('fetchDataDetail'); 

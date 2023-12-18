@@ -147,7 +147,8 @@
  
     function tabclick(id){
     // alert(id);
-    var url = '/fetch-data/' + id;
+    // var url = '/fetch-data/' + id;
+    var url= '{{ route("mfetchData", ":id") }}'.replace(':id', id);
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {
@@ -183,7 +184,8 @@
     function showmodal(id){
         // alert(id);
         $.ajax({
-        url: '/fetch-datadetail/' + id,
+        // url: '/fetch-datadetail/' + id,
+        url: '{{ route("mfetchDataDetail", ":id") }}'.replace(':id', id),
         type: 'GET',
         success: function(response) {
             console.log(response)

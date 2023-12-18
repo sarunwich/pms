@@ -128,7 +128,8 @@
 
             // AJAX request to fetch data
             $.ajax({
-                url: '/data/' + dataId,
+                // url: '/data/' + dataId,
+                url: '{{ route("data",'+dataId+') }}',
                 type: 'GET',
                 success: function(response) {
                     // Populate modal with fetched data
@@ -193,7 +194,7 @@
 //     });
 function tabclick(id){
     // alert(id);
-    var url = '/fetch-data/' + id;
+    var url = '/coop/fetch-data/' + id;
                     fetch(url)
                         .then(response => response.json())
                         .then(data => {

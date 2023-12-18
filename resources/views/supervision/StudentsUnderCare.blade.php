@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    {{-- <div class="card">
+    <div class="card">
         <div class="card-header">
             <h3 class="card-title">นิสิตในความดูแล</h3>
 
@@ -68,7 +68,7 @@
                 </tbody>
             </table>
         </div>
-    </div> --}}
+    </div>
 
 </div>
 
@@ -100,7 +100,8 @@
 
             // AJAX request to fetch data
             $.ajax({
-                url: '/data/' + dataId,
+               
+                url: '{{ route("data", ":dataId") }}'.replace(':dataId', dataId),
                 type: 'GET',
                 success: function(response) {
                     // Populate modal with fetched data

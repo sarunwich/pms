@@ -102,7 +102,8 @@
 
             // AJAX request to fetch data
             $.ajax({
-                url: '/data/' + dataId,
+                // url: '/data/' + dataId,
+                url: '{{ route("mdata", ":dataId") }}'.replace(':dataId', dataId),
                 type: 'GET',
                 success: function(response) {
                     // Populate modal with fetched data
