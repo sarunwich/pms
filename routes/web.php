@@ -9,6 +9,11 @@ use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\ApprentyController;
 use App\Http\Controllers\ReportstdController;
 Use App\Http\Controllers\PicreportController;
+use App\Http\Controllers\WordExportController;
+use App\Http\Controllers\AdvisorController;
+use App\Http\Controllers\TeachBusController;
+use App\Http\Controllers\SupervisionController;
+use App\Http\Controllers\Select2AutocompleteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +35,10 @@ Route::post('/get-amphur', [DropdownController::class,'getAmphur'])->name('get.a
 Route::post('/get-district', [DropdownController::class,'getDistrict'])->name('get.district');
 
 Auth::routes();
-
+Route::post('/get-branches', [DropdownController::class,'getBranches'])->name('get.branches');
+Route::post('/get-majors', [DropdownController::class,'getMajors'])->name('get.majors');
+Route::post('/get-amphur', [DropdownController::class,'getAmphur'])->name('get.amphur');
+Route::post('/get-district', [DropdownController::class,'getDistrict'])->name('get.district');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /*------------------------------------------
 --------------------------------------------
@@ -58,6 +66,7 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::get('/redit/{id}',  [ReportstdController::class,'edit'])->name('edit.Reportstd');
     Route::put('/Reportstdupdate/{id}',  [ReportstdController::class,'update'])->name('Reportstdupdate.Reportstd');
     Route::post('/addpic',  [PicreportController::class,'addpic'])->name('addpic');
+    Route::get('/exportToWord/{startdate}/{enddate}',[WordExportController::class,'exportToWord'])->name('exportToWord');
 
     
 });
@@ -79,7 +88,40 @@ All Admin Routes List
 --------------------------------------------
 --------------------------------------------*/
 Route::middleware(['auth', 'user-access:manager'])->group(function () {
-  
-    Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+    Route::resource('Teach_bus', TeachBusController::class);
+     Route::get('/manager/home', [HomeController::class, 'managerHome'])->name('manager.home');
+     Route::get('/manager/Advisor-add', [AdvisorController::class, 'add'])->name('Advisor.add');
+     Route::post('/manager/addteacher',[AdvisorController::class, 'addteacher'])->name('addteacher');
+     Route::get('/manager/Assign_advisor', [AdvisorController::class, 'assignAdvisor'])->name('Assign.advisor');
+     Route::get('/select2-autocomplete-ajax', [Select2AutocompleteController::class,'dataAjax'])->name('dataAjax');
+     Route::get('/select2-autocomplete-ajax-teacher', [Select2AutocompleteController::class,'datateacher'])->name('datateacher');
+
+     Route::get('/manager/mStudents_under_care', [SupervisionController::class, 'mStudentsUnderCare'])->name('mStudents_under_care');
+     Route::get('/mUnderCareSearch', [SupervisionController::class, 'StudentsUnderCare'])->name('mUnderCare.Search');
+     Route::get('/mdata/{id}', [SupervisionController::class, 'show']);
+     Route::get('/manager/mstdreportta', [SupervisionController::class, 'mstdreportta'])->name('mstdreportta');
+     Route::get('/mfetch-data/{id}',[SupervisionController::class, 'fetchData'])->name('mfetchData'); 
+     Route::get('/mfetch-datadetail/{id}',[SupervisionController::class, 'fetchDataDetail'])->name('mfetchDataDetail');
+    //  Route::get('/Addmonter-store', [Select2AutocompleteController::class,'store']);
     
+    // Route::get('/manager/home', function () {
+    //     return view('manager.home');
+    // })->name('manager.home');'
+    
+});
+
+/*------------------------------------------
+--------------------------------------------
+All Admin Routes List
+--------------------------------------------
+--------------------------------------------*/
+
+Route::middleware(['auth', 'user-access:supervision'])->group(function () {
+    Route::get('/supervision/home', [HomeController::class, 'supervisionHome'])->name('supervision.home');
+    Route::get('/supervision/Students_under_care', [SupervisionController::class, 'StudentsUnderCare'])->name('Students_under_care');
+    Route::get('/supervision/UnderCareSearch', [SupervisionController::class, 'StudentsUnderCare'])->name('UnderCare.Search');
+    Route::get('/data/{id}', [SupervisionController::class, 'show']);
+    Route::get('/supervision/stdreportta', [SupervisionController::class, 'stdreportta'])->name('stdreportta');
+    Route::get('/fetch-data/{id}',[SupervisionController::class, 'fetchData'])->name('fetchData'); 
+    Route::get('/fetch-datadetail/{id}',[SupervisionController::class, 'fetchDataDetail'])->name('fetchDataDetail'); 
 });

@@ -113,6 +113,7 @@
         </tbody>
       </table>
     </div>
+    <a href="{{route('exportToWord',['startdate'=>$startdate,'enddate'=>$enddate])}}" ><button>พิมพ์</button></a>
 
   </div>
   <!-- /.card-body -->

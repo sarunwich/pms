@@ -17,11 +17,29 @@ class UserAccess
      */
     public function handle(Request $request, Closure $next, $userType)
     {
-        if(auth()->user()->type == $userType){
-            return $next($request);
+        if(auth()->user()->type == 1){
+             return $next($request);
+        // return response()->json(['You do not have .'.auth()->user()->type.' '.$userType]);
+        // Auth::logout();
         }
+        if(auth()->user()->type == 2){
+            return $next($request);
+       // return response()->json(['You do not have .'.auth()->user()->type.' '.$userType]);
+       // Auth::logout();
+       }
+       if(auth()->user()->type == 3){
+        return $next($request);
+   // return response()->json(['You do not have .'.auth()->user()->type.' '.$userType]);
+   // Auth::logout();
+   }
+       if(auth()->user()->type == 0){
+        return $next($request);
+   // return response()->json(['You do not have .'.auth()->user()->type.' '.$userType]);
+   // Auth::logout();
+   }
+        // Auth::logout();
+        return response()->json(['You do not have permission to access for this page.'.auth()->user()->type.' '.$userType]);
         Auth::logout();
-        return response()->json(['You do not have permission to access for this page.']);
         /* return response()->view('errors.check-permission'); */
     }
 }

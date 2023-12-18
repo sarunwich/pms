@@ -64,6 +64,10 @@ class InternshipController extends Controller
     {
         $startdate = $request->input('startdate'); // Search keyword
         $enddate = $request->input('enddate'); // Search keyword
+        if(!$startdate){
+            $startdate=date('Y-m-d',strtotime('-7 days'));
+            $enddate=date('Y-m-d');
+        }
 
         $uid = Auth::user()->id;
         $reportstds = Reportstd::where('reportstds.user_id', $uid)
@@ -76,7 +80,10 @@ class InternshipController extends Controller
                    ->where('reportstds.user_id', $uid)
             ->orderBy('reportstds.date_add', 'desc')
             ->get();
-            }    
+            }    else{
+                $startdate=date('Y-m-d',strtotime('-7 days'));
+                $enddate=date('Y-m-d');
+            }
             
         return view('users.Internship_print', compact('reportstds','startdate','enddate'));
     }
