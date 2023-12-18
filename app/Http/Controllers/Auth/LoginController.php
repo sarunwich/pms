@@ -46,7 +46,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
         if(! auth()->attempt($credentials)){
             return redirect()->route('login')
-                ->with('error','Email-Address And Password Are Wrong.');
+                ->with('error','Email-Address Or Password Are Wrong.');
         }
         if (auth()->user()->type == 1) {
             return redirect()->route('admin.home');

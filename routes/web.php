@@ -14,6 +14,7 @@ use App\Http\Controllers\AdvisorController;
 use App\Http\Controllers\TeachBusController;
 use App\Http\Controllers\SupervisionController;
 use App\Http\Controllers\Select2AutocompleteController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,9 @@ Route::post('/get-branches', [DropdownController::class,'getBranches'])->name('g
 Route::post('/get-majors', [DropdownController::class,'getMajors'])->name('get.majors');
 Route::post('/get-amphur', [DropdownController::class,'getAmphur'])->name('get.amphur');
 Route::post('/get-district', [DropdownController::class,'getDistrict'])->name('get.district');
+
+Route::get('/password/change', [UserController::class ,'changePasswordForm'])->name('password.change');
+Route::put('/password/change', [UserController::class ,'updatePassword'])->name('password.update');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 /*------------------------------------------
 --------------------------------------------
@@ -67,7 +71,9 @@ Route::middleware(['auth', 'user-access:user'])->group(function () {
     Route::put('/Reportstdupdate/{id}',  [ReportstdController::class,'update'])->name('Reportstdupdate.Reportstd');
     Route::post('/addpic',  [PicreportController::class,'addpic'])->name('addpic');
     Route::get('/exportToWord/{startdate}/{enddate}',[WordExportController::class,'exportToWord'])->name('exportToWord');
-
+    Route::get('/password/changeu', [UserController::class ,'uchangePasswordForm'])->name('password.changeu');
+    Route::put('/password/change', [UserController::class ,'updatePassword'])->name('password.update');
+   
     
 });
 
@@ -102,7 +108,9 @@ Route::middleware(['auth', 'user-access:manager'])->group(function () {
      Route::get('/manager/mstdreportta', [SupervisionController::class, 'mstdreportta'])->name('mstdreportta');
      Route::get('/mfetch-data/{id}',[SupervisionController::class, 'fetchData'])->name('mfetchData'); 
      Route::get('/mfetch-datadetail/{id}',[SupervisionController::class, 'fetchDataDetail'])->name('mfetchDataDetail');
-    //  Route::get('/Addmonter-store', [Select2AutocompleteController::class,'store']);
+     Route::get('/password/changem', [UserController::class ,'mchangePasswordForm'])->name('password.changem');
+     Route::put('/password/change', [UserController::class ,'updatePassword'])->name('password.update');
+     //  Route::get('/Addmonter-store', [Select2AutocompleteController::class,'store']);
     
     // Route::get('/manager/home', function () {
     //     return view('manager.home');
@@ -124,4 +132,7 @@ Route::middleware(['auth', 'user-access:supervision'])->group(function () {
     Route::get('/supervision/stdreportta', [SupervisionController::class, 'stdreportta'])->name('stdreportta');
     Route::get('/fetch-data/{id}',[SupervisionController::class, 'fetchData'])->name('fetchData'); 
     Route::get('/fetch-datadetail/{id}',[SupervisionController::class, 'fetchDataDetail'])->name('fetchDataDetail'); 
+    Route::get('/password/change', [UserController::class ,'changePasswordForm'])->name('password.change');
+    Route::put('/password/change', [UserController::class ,'updatePassword'])->name('password.update');
+    
 });
